@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Esportivo - Início</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <h1>Radar <span>Esportivo</span></h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="ativo">Página Inicial</a></li>
+            <li><a href="paginas/aquaticos.html">Esportes Aquáticos</a></li>
+            <li><a href="paginas/ciclismo.html">Ciclismo</a></li>
+            <li><a href="paginas/compras.html">Compras</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <h2 class="titulo-secao">Últimas Atualizações do Mercado</h2>
+        
+        <div id="grid-noticias" class="grid-noticias">
+            <p style="color: var(--texto-secundario); text-align: center; grid-column: 1/-1;">
+                Carregando dados da API...
+            </p>
+        </div>
+    </main>
+
+    <script>
+        async function carregarNoticias() {
+            const grid = document.getElementById('grid-noticias');
+            
+            try {
+                const resposta = await fetch('http://localhost:5000/api/noticias');
+                
+                if (!resposta.ok) throw new Error("Erro na comunicação com a API.");
+
+                const noticias = await resposta.json();
+                grid.innerHTML = ''; 
+
+                if (noticias[0] && noticias[0].erro) throw new Error(noticias[0].erro);
+
+                if (noticias.length === 0) {
+                    grid.innerHTML = '<p class="mensagem-erro">Nenhuma notícia encontrada no momento.</p>';
+                    return;
+                }
+
+                noticias.forEach(noticia => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    card.innerHTML = `
+                        <span class="card-categoria">${noticia.category}</span>
+                        <a href="${noticia.url}" target="_blank" class="card-titulo">${noticia.title}</a>
+                        <p class="card-resumo">${noticia.summary}</p>
+                        <div class="card-rodape">
+                            <span>Fonte: ${noticia.tags[0]}</span>
+                            <span>${noticia.date}</span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (erro) {
+                grid.innerHTML = `
+                    <div class="mensagem-erro">
+                        <strong>Falha ao carregar as notícias:</strong><br><br>
+                        Certifique-se de que o arquivo app.py está rodando no terminal.<br><br>
+                        Detalhe: ${erro.message}
+                    </div>
+                `;
+            }
+        }
+        window.onload = carregarNoticias;
+    </script>
+</body>
+</html>

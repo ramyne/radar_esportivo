@@ -1,0 +1,20 @@
+{
+  "tema": "indústria esportiva",
+  "inicio": "2026-10-07",
+  "fim": "2026-10-13",
+  "candidatas_unicas": 32,
+  "extraidas_na_janela": 12,
+  "aprovadas_apos_filtros": 12,
+  "selecionadas": 10,
+  "rejeicoes_por_motivo": {
+    "fora_da_janela": 16,
+    "falha_extracao": 1,
+    "texto_duplicado": 1,
+    "sem_contexto_esportivo": 2
+  },
+  "origens_selecionadas": {
+    "Google News": 10
+  },
+  "erros_fontes": {},
+  "gerado_em": "2026-10-13T23:30:07.403438-03:00"
+}
