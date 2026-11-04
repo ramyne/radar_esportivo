@@ -48,7 +48,7 @@
             const grid = document.getElementById('grid-noticias');
 
             try {
-                const resposta = await fetch('http://localhost:5000/api/noticias');
+                const resposta = await fetch('http://localhost:5000/api/noticias/compras');
 
                 if (!resposta.ok) throw new Error("Erro na comunicação com a API.");
 
@@ -58,9 +58,7 @@
                 if (noticias[0] && noticias[0].erro) throw new Error(noticias[0].erro);
 
                 // Filtro de Equipamentos e Compras: título + resumo
-                const noticiasFiltradas = noticias.filter(noticia =>
-                    FILTRO.test(normalizar(noticia.title + ' ' + noticia.summary))
-                );
+                const noticiasFiltradas = noticias; // a API já entrega só o tema desta página
 
                 // Estado vazio: o HTML/CSS é entregue mesmo sem resultados
                 if (noticiasFiltradas.length === 0) {
