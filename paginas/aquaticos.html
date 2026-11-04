@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -38,7 +37,7 @@
             const grid = document.getElementById('grid-noticias');
 
             try {
-                const resposta = await fetch('http://localhost:5000/api/noticias');
+                const resposta = await fetch('http://localhost:5000/api/noticias/aquaticos');
 
                 if (!resposta.ok) {
                     throw new Error("Erro na comunicação com a API.");
@@ -57,14 +56,7 @@
                 }
 
                 // FILTRO DE ESPORTES AQUÁTICOS
-                const noticiasFiltradas = noticias.filter(noticia => {
-                    const titulo = (noticia.title || '').toLowerCase();
-
-                    return titulo.includes("natação") ||
-                           titulo.includes("surfe") ||
-                           titulo.includes("água") ||
-                           titulo.includes("piscina");
-                });
+                const noticiasFiltradas = noticias; // a API já entrega só o tema desta página
 
                 // VERIFICA SE EXISTEM NOTÍCIAS DO TEMA
                 if (noticiasFiltradas.length === 0) {
