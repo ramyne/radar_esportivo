@@ -59,5 +59,3 @@ Como a API já entrega só o tema de cada página, **não é mais preciso filtra
 3. Na pasta `paginas/`, copie uma página existente (ex: `ciclismo.html`) e troque o título e a URL do `fetch` para `http://localhost:5000/api/noticias/<categoria>`.
 4. No menu superior (tag `<nav>`), coloque `class="ativo"` no link da nova página e acrescente o link nas outras páginas.
 5. Rode `python coletar_todas.py` para gerar os dados da nova categoria.
-
-Bom trabalho, squad! 🚀
